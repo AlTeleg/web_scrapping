@@ -43,7 +43,7 @@ def light_search(keywords):
         if indication:
             article_list.append([f'Дата - {article.find("time").attrs["datetime"][:10]}',
                                  f'Заголовок - "{article.find("h2").find("span").text}"',
-                                 f'Ссылка - https:/'
+                                 f'Ссылка - https://habr.com'
                                  f'{article.find(class_="tm-article-snippet__title-link").attrs["href"]}'])
         art_text_list = []
         indication = False
@@ -68,14 +68,13 @@ def deep_search(keywords):
         texts = a.find_all('p')
         spans = a.find_all('span')
         art_text_list.append(','.join([i.text for i in spans] + [i.text for i in texts]))
-        pprint(','.join([i.text for i in spans] + [i.text for i in texts]))
         for word in keywords:
             if word.lower() in ' '.join([str(x).lower() for x in art_text_list]):
                 indication = True
         if indication:
             article_list.append([f'Дата - {a.find("time").attrs["datetime"][:10]}',
                                  f'Заголовок - "{a.find_all("span")[3].text}"',
-                                 f'Ссылка - https:/'
+                                 f'Ссылка - https://habr.com'
                                  f'{link}'])
         art_text_list = []
         indication = False
